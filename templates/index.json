@@ -1,16 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "proof": { "type": "proof-bar" },
-    "dolor": { "type": "el-problema" },
-    "hvco": { "type": "hvco" },
-    "complexes": { "type": "ingredient-complexes" },
-    "guia": { "type": "guia" },
-    "autoridad": { "type": "autoridad" },
-    "why": { "type": "why-voltrix" },
-    "testimonials": { "type": "testimonials" },
-    "pricing": { "type": "pricing" },
-    "faq": { "type": "faq" }
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "proof": {
+      "type": "proof-bar",
+      "settings": {}
+    },
+    "dolor": {
+      "type": "el-problema",
+      "settings": {}
+    },
+    "hvco": {
+      "type": "hvco",
+      "settings": {}
+    },
+    "guia": {
+      "type": "guia",
+      "settings": {}
+    },
+    "complexes": {
+      "type": "ingredient-complexes",
+      "settings": {}
+    },
+    "autoridad": {
+      "type": "autoridad",
+      "settings": {}
+    },
+    "why": {
+      "type": "why-voltrix",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "pricing": {
+      "type": "pricing",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
   },
-  "order": ["hero", "proof", "dolor", "hvco", "complexes", "guia", "autoridad", "why", "testimonials", "pricing", "faq"]
+  "order": [
+    "hero",
+    "proof",
+    "dolor",
+    "hvco",
+    "complexes",
+    "guia",
+    "autoridad",
+    "why",
+    "testimonials",
+    "pricing",
+    "faq"
+  ]
 }
