@@ -1,3 +1,5 @@
+{% assign vx_product = all_products['voltrix-daily-performance-formula-30-porciones'] %}
+
 <section class="vx-prod section--dark page-width" id="producto">
   <p class="vx-eyebrow text-volt">El producto</p>
   <h2 class="font-display">Voltrix Daily<br>Performance Formula</h2>
@@ -18,6 +20,8 @@
     <div class="vx-prod__visual">
       {% if section.settings.imagen_producto %}
         {{ section.settings.imagen_producto | image_url: width: 500 | image_tag: loading: 'lazy', class: 'vx-prod__img' }}
+      {% elsif vx_product and vx_product.featured_image %}
+        {{ vx_product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'vx-prod__img' }}
       {% else %}
         <div class="vx-prod__placeholder">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -27,7 +31,9 @@
     </div>
     <div>
       <div class="vx-price-row">
-        <div class="vx-price-big">44,99€</div>
+        <div class="vx-price-big">
+          {% if vx_product %}{{ vx_product.price | money }}{% else %}44,99€{% endif %}
+        </div>
         <div class="vx-price-unit">/ 30 porciones</div>
       </div>
       <div class="vx-price-tag">
@@ -40,7 +46,22 @@
         <div class="vx-bullet"><span class="vx-bcheck">✓</span> 3g de creatina monohidrato, dosis completa</div>
         <div class="vx-bullet"><span class="vx-bcheck">✓</span> KSM-66® para regular el estrés y el cortisol</div>
       </div>
-      <a href="{{ routes.cart_url }}" class="vx-btn-add">Empezar con Voltrix — 44,99€ →</a>
+
+      {% if vx_product %}
+        {% form 'product', vx_product %}
+          <input type="hidden" name="id" value="{{ vx_product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="vx-btn-add" {% unless vx_product.available %}disabled{% endunless %}>
+            {% if vx_product.available %}
+              Empezar con Voltrix — {{ vx_product.price | money }} →
+            {% else %}
+              Próximamente
+            {% endif %}
+          </button>
+        {% endform %}
+      {% else %}
+        <button class="vx-btn-add" disabled>Próximamente</button>
+      {% endif %}
+
       <div class="vx-garantia">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Envío incluido · Suscripción cancelable cuando quieras
@@ -74,7 +95,8 @@
   .vx-bullets { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
   .vx-bullet { display: flex; align-items: center; gap: 11px; font-size: 14px; color: rgba(255,255,255,.55); font-weight: 500; }
   .vx-bcheck { width: 19px; height: 19px; border-radius: 5px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--color-volt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-  .vx-btn-add { display: block; text-align: center; width: 100%; max-width: 420px; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; }
+  .vx-btn-add { display: block; text-align: center; width: 100%; max-width: 420px; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; }
+  .vx-btn-add:disabled { opacity: .5; cursor: not-allowed; }
   .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); }
   .vx-garantia svg { color: var(--color-volt); }
   @media (max-width: 700px) { .vx-prod__layout { grid-template-columns: 1fr; } }
@@ -86,7 +108,7 @@
     {
       "type": "image_picker",
       "id": "imagen_producto",
-      "label": "Foto del bote"
+      "label": "Foto del bote (opcional, sustituye a la del producto)"
     }
   ]
 }
