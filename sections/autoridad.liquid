@@ -1,0 +1,36 @@
+<section class="vx-aut section--dark page-width">
+  <p class="vx-eyebrow text-volt">Por qué confiar en Voltrix</p>
+  <h2 class="font-display">La fórmula honesta.<br>Sin compromiso en las dosis.</h2>
+  <p class="vx-aut__sub">Cualquiera puede poner un ingrediente en la etiqueta. Lo que diferencia a Voltrix es que cada uno está en la dosis que los estudios indican.</p>
+  <div class="vx-aut__grid">
+    <div class="vx-aut__item">
+      <div class="vx-aut__num">2:1</div>
+      <div class="vx-aut__titulo">El ratio teanina:cafeína más estudiado</div>
+      <div class="vx-aut__desc">200mg de L-teanina pura por cada 100mg de cafeína. No extracto de té verde — L-teanina al 100% para controlar exactamente lo que entra.</div>
+    </div>
+    <div class="vx-aut__item">
+      <div class="vx-aut__num">3g</div>
+      <div class="vx-aut__titulo">Creatina que satura los depósitos</div>
+      <div class="vx-aut__desc">La dosis diaria recomendada por la evidencia científica. Sin fase de carga obligatoria. Los depósitos musculares se saturan en 3–4 semanas de toma consistente.</div>
+    </div>
+    <div class="vx-aut__item">
+      <div class="vx-aut__num">40%</div>
+      <div class="vx-aut__titulo">La absorción del Mg bisglicinato vs el óxido</div>
+      <div class="vx-aut__desc">El magnesio óxido que usan la mayoría se absorbe menos del 4%. El bisglicinato de Voltrix supera el 40%. No es el mismo ingrediente aunque el nombre suene igual.</div>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-aut { padding: 88px 24px; }
+  .vx-aut h2 { font-size: clamp(28px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.4px; margin-bottom: 12px; }
+  .vx-aut__sub { font-size: 16px; color: rgba(255,255,255,.5); max-width: 500px; line-height: 1.72; margin-bottom: 44px; }
+  .vx-aut__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .vx-aut__item { background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 16px; padding: 26px 22px; }
+  .vx-aut__num { font-family: var(--font-display); font-size: 42px; color: var(--color-volt); line-height: 1; margin-bottom: 6px; }
+  .vx-aut__titulo { font-size: 14px; font-weight: 800; color: var(--color-white); margin-bottom: 8px; line-height: 1.3; }
+  .vx-aut__desc { font-size: 13px; color: rgba(255,255,255,.35); line-height: 1.65; }
+  @media (max-width: 700px) { .vx-aut__grid { grid-template-columns: 1fr; } }
+</style>
+{% schema %}
+{ "name": "Autoridad", "settings": [] }
+{% endschema %}

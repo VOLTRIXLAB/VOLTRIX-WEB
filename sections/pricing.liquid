@@ -1,0 +1,93 @@
+<section class="vx-prod section--dark page-width" id="producto">
+  <p class="vx-eyebrow text-volt">El producto</p>
+  <h2 class="font-display">Voltrix Daily<br>Performance Formula</h2>
+
+  <div class="vx-cafe">
+    <div>
+      <div class="vx-cafe__num">1,50€</div>
+      <div class="vx-cafe__lbl">Al día</div>
+    </div>
+    <div class="vx-cafe__div"></div>
+    <div>
+      <div class="vx-cafe__titulo">Menos que tu café de las 9.<br>Con mucho más impacto en tu día.</div>
+      <div class="vx-cafe__desc">44,99€ al mes son 1,50€ al día. <strong>Menos que el café que tomas cada mañana.</strong> Si lo compraras todo por separado pagarías entre 60 y 90€ al mes — y tendrías cuatro botes que olvidarías tomar.</div>
+    </div>
+  </div>
+
+  <div class="vx-prod__layout">
+    <div class="vx-prod__visual">
+      {% if section.settings.imagen_producto %}
+        {{ section.settings.imagen_producto | image_url: width: 500 | image_tag: loading: 'lazy', class: 'vx-prod__img' }}
+      {% else %}
+        <div class="vx-prod__placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Foto del bote pendiente — sustituir aquí</p>
+        </div>
+      {% endif %}
+    </div>
+    <div>
+      <div class="vx-price-row">
+        <div class="vx-price-big">44,99€</div>
+        <div class="vx-price-unit">/ 30 porciones</div>
+      </div>
+      <div class="vx-price-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        1,50€/día — menos que tu café de las 9
+      </div>
+      <div class="vx-bullets">
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> Hidratación real con electrolitos en dosis efectiva</div>
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> Energía sin crash — ratio 2:1 teanina:cafeína</div>
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> 3g de creatina monohidrato, dosis completa</div>
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> KSM-66® para regular el estrés y el cortisol</div>
+      </div>
+      <a href="{{ routes.cart_url }}" class="vx-btn-add">Empezar con Voltrix — 44,99€ →</a>
+      <div class="vx-garantia">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Envío incluido · Suscripción cancelable cuando quieras
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-prod { padding: 88px 24px; }
+  .vx-prod h2 { font-size: clamp(28px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.4px; margin-bottom: 32px; }
+  .vx-cafe { background: #141430; border: 1px solid #28284A; border-left: 3px solid var(--color-volt); border-radius: 14px; padding: 26px 30px; display: flex; align-items: center; gap: 26px; margin-bottom: 56px; flex-wrap: wrap; }
+  .vx-cafe__num { font-family: var(--font-display); font-size: 50px; color: var(--color-volt); line-height: 1; }
+  .vx-cafe__lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-top: 3px; }
+  .vx-cafe__div { width: 1px; height: 56px; background: #28284A; flex-shrink: 0; }
+  .vx-cafe__titulo { font-size: 17px; font-weight: 800; color: var(--color-white); margin-bottom: 5px; line-height: 1.3; }
+  .vx-cafe__desc { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.65; }
+  .vx-cafe__desc strong { color: var(--color-white); font-weight: 700; }
+  .vx-prod__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .vx-prod__visual { display: flex; align-items: center; justify-content: center; }
+  .vx-prod__img { border-radius: 16px; width: 100%; }
+  .vx-prod__placeholder {
+    width: 100%; aspect-ratio: 1; border: 2px dashed #28284A; border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    color: rgba(255,255,255,.25); background: rgba(255,255,255,.02);
+  }
+  .vx-prod__placeholder p { font-size: 12px; text-align: center; max-width: 180px; }
+  .vx-price-row { display: flex; align-items: baseline; gap: 9px; margin-bottom: 5px; }
+  .vx-price-big { font-family: var(--font-display); font-size: 50px; color: var(--color-white); line-height: 1; }
+  .vx-price-unit { font-size: 14px; color: rgba(255,255,255,.3); }
+  .vx-price-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); border-radius: 8px; padding: 6px 13px; margin: 12px 0 22px; font-size: 12px; font-weight: 700; color: var(--color-volt); }
+  .vx-bullets { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+  .vx-bullet { display: flex; align-items: center; gap: 11px; font-size: 14px; color: rgba(255,255,255,.55); font-weight: 500; }
+  .vx-bcheck { width: 19px; height: 19px; border-radius: 5px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--color-volt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .vx-btn-add { display: block; text-align: center; width: 100%; max-width: 420px; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; }
+  .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); }
+  .vx-garantia svg { color: var(--color-volt); }
+  @media (max-width: 700px) { .vx-prod__layout { grid-template-columns: 1fr; } }
+</style>
+{% schema %}
+{
+  "name": "Producto y Precio",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "imagen_producto",
+      "label": "Foto del bote"
+    }
+  ]
+}
+{% endschema %}

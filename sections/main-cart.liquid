@@ -1,0 +1,17 @@
+<section class="vx-main-cart section--dark page-width">
+  <h1 class="font-display">Tu carrito</h1>
+  {% if cart.item_count > 0 %}
+    <ul>
+      {% for item in cart.items %}
+        <li>{{ item.title }} — {{ item.quantity }} — {{ item.final_line_price | money }}</li>
+      {% endfor %}
+    </ul>
+    <p>Total: {{ cart.total_price | money }}</p>
+    <a href="{{ routes.cart_url }}" class="btn btn--volt">Ver carrito</a>
+  {% else %}
+    <p>Tu carrito está vacío.</p>
+  {% endif %}
+</section>
+{% schema %}
+{ "name": "Carrito principal", "settings": [] }
+{% endschema %}
