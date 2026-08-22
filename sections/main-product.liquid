@@ -5,6 +5,32 @@
     <input type="submit" value="Añadir al carrito" class="btn btn--volt">
   {% endform %}
 </section>
+
+{% comment %} ── JSON-LD: Product schema para rich results en Google (precio, stock, valoraciones) ── {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 300 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  "brand": {
+    "@type": "Brand",
+    "name": "Voltrix"
+  },
+  {% if product.featured_image %}
+  "image": ["https:{{ product.featured_image | image_url: width: 1200 }}"],
+  {% endif %}
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "price": "{{ product.price | money_without_currency | strip_html }}",
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+  }
+}
+</script>
+
 {% schema %}
 { "name": "Producto principal", "settings": [] }
 {% endschema %}
