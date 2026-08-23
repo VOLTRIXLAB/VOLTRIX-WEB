@@ -1,0 +1,252 @@
+<div class="wl">
+<style>
+.wl { font-family: 'Inter', sans-serif; background: #0A0A1A; color: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.wl *, .wl *::before, .wl *::after { box-sizing: border-box; }
+.wl { --wl-ink: #0A0A1A; --wl-ink-panel: #12122A; --wl-white-70: rgba(255,255,255,.7); --wl-white-50: rgba(255,255,255,.5); --wl-white-30: rgba(255,255,255,.3); --wl-white-12: rgba(255,255,255,.12); --wl-white-07: rgba(255,255,255,.07); --wl-blue: #2563EB; --wl-volt: #C8F135; --wl-volt-dim: #A8CC2A; }
+
+.wl .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+.wl .nav { display: flex; align-items: center; justify-content: center; padding: 28px 24px 0; }
+.wl .logo { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: 1px; color: #fff; display: flex; align-items: center; gap: 2px; }
+.wl .logo .bolt { color: var(--wl-volt); }
+
+.wl .hero { padding: 64px 0 40px; text-align: center; position: relative; }
+.wl .hero::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 480px; height: 480px; background: radial-gradient(circle, rgba(200,241,53,.13) 0%, transparent 68%); pointer-events: none; z-index: 0; }
+
+.wl .eyebrow { position: relative; display: inline-flex; align-items: center; gap: 8px; background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.25); border-radius: 999px; padding: 6px 16px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--wl-volt); margin-bottom: 28px; }
+
+.wl .hero h1 { position: relative; font-family: 'DM Serif Display', serif; font-size: clamp(34px, 7vw, 52px); font-weight: 400; line-height: 1.12; letter-spacing: -0.5px; margin-bottom: 20px; }
+.wl .hero h1 em { font-style: italic; color: var(--wl-volt); }
+
+.wl .hero-sub { position: relative; font-size: 17px; color: var(--wl-white-70); max-width: 460px; margin: 0 auto 36px; }
+.wl .hero-sub strong { color: #fff; font-weight: 700; }
+
+.wl .form-card { position: relative; background: var(--wl-ink-panel); border: 1px solid var(--wl-white-12); border-radius: 18px; padding: 28px 26px; max-width: 460px; margin: 0 auto; text-align: left; }
+.wl .form-lead { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.wl .form-lead-icon { width: 34px; height: 34px; border-radius: 9px; background: rgba(200,241,53,.12); color: var(--wl-volt); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.wl .form-lead-text { font-size: 13px; color: var(--wl-white-70); line-height: 1.45; }
+.wl .form-lead-text strong { color: #fff; display: block; font-size: 14px; font-weight: 700; margin-bottom: 1px; }
+
+.wl .signup-form { display: flex; flex-direction: column; gap: 10px; }
+.wl .field-row { display: flex; flex-direction: column; gap: 6px; }
+.wl .field-row label { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--wl-white-50); }
+.wl .field-row input { width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--wl-white-12); border-radius: 10px; padding: 13px 14px; font-family: 'Inter', sans-serif; font-size: 15px; color: #fff; outline: none; transition: border-color .15s ease, background .15s ease; }
+.wl .field-row input::placeholder { color: var(--wl-white-30); }
+.wl .field-row input:focus { border-color: var(--wl-volt); background: rgba(255,255,255,.08); }
+
+.wl .submit-btn { margin-top: 6px; width: 100%; background: var(--wl-volt); color: var(--wl-ink); border: none; border-radius: 10px; padding: 15px 20px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; transition: background .15s ease, transform .1s ease; }
+.wl .submit-btn:hover { background: var(--wl-volt-dim); }
+.wl .submit-btn:active { transform: scale(.985); }
+
+.wl .form-note { margin-top: 12px; font-size: 11.5px; color: var(--wl-white-30); text-align: center; line-height: 1.5; }
+.wl .form-success { display: none; text-align: center; padding: 10px 0 2px; font-size: 14px; color: var(--wl-volt); font-weight: 700; }
+.wl .form-error { font-size: 12px; color: #F87171; margin-top: 8px; text-align: center; }
+
+.wl .proof-strip { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 28px auto 0; font-size: 12.5px; color: var(--wl-white-50); font-weight: 500; }
+.wl .proof-strip .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--wl-white-30); flex-shrink: 0; }
+
+.wl .divider { height: 1px; background: var(--wl-white-07); margin: 56px 0; }
+
+.wl .section-label { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--wl-volt); text-align: center; margin-bottom: 12px; }
+.wl .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(24px, 4.5vw, 32px); font-weight: 400; text-align: center; line-height: 1.25; margin-bottom: 44px; }
+.wl .section-title em { font-style: italic; color: var(--wl-volt); }
+
+.wl .moments { display: flex; flex-direction: column; gap: 2px; }
+.wl .moment { display: flex; gap: 18px; align-items: flex-start; padding: 22px 4px; border-top: 1px solid var(--wl-white-07); }
+.wl .moment:last-child { border-bottom: 1px solid var(--wl-white-07); }
+.wl .moment-time { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--wl-volt); width: 64px; flex-shrink: 0; padding-top: 2px; }
+.wl .moment-body h4 { font-size: 15.5px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.wl .moment-body p { font-size: 13.5px; color: var(--wl-white-50); line-height: 1.6; }
+
+.wl .complejos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.wl .complejo-card { background: var(--wl-ink-panel); border: 1px solid var(--wl-white-12); border-radius: 14px; padding: 20px 18px; }
+.wl .complejo-num { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--wl-volt); margin-bottom: 10px; }
+.wl .complejo-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+.wl .complejo-desc { font-size: 12.5px; color: var(--wl-white-50); line-height: 1.55; }
+
+.wl .founder-box { background: linear-gradient(135deg, rgba(37,99,235,.14), rgba(200,241,53,.06)); border: 1px solid var(--wl-white-12); border-radius: 18px; padding: 30px 28px; }
+.wl .founder-quote { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 18px; line-height: 1.55; color: #fff; margin-bottom: 16px; }
+.wl .founder-sign { font-size: 13px; color: var(--wl-white-50); font-weight: 600; }
+.wl .founder-sign span { color: var(--wl-volt); }
+
+.wl .cta-final { text-align: center; }
+.wl .cta-final .section-title { margin-bottom: 32px; }
+
+.wl .footer { padding: 48px 0 40px; text-align: center; border-top: 1px solid var(--wl-white-07); margin-top: 56px; }
+.wl .footer-logo { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 8px; }
+.wl .footer-logo .bolt { color: var(--wl-volt); }
+.wl .footer-note { font-size: 11.5px; color: var(--wl-white-30); max-width: 340px; margin: 0 auto; line-height: 1.6; }
+
+@media (max-width: 480px) {
+  .wl .hero { padding: 48px 0 32px; }
+  .wl .form-card { padding: 22px 18px; }
+  .wl .complejos-grid { grid-template-columns: 1fr; }
+  .wl .moment { gap: 12px; }
+  .wl .moment-time { width: 50px; font-size: 13px; }
+}
+</style>
+
+<div class="nav">
+  <div class="logo">Volt<span class="bolt">rix</span></div>
+</div>
+
+<!-- ══ HERO + FORM ══ -->
+<div class="wrap">
+  <div class="hero" id="wl-top">
+    <div class="eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Próximamente — 15% dto. fundador + guía gratis
+    </div>
+    <h1>Todo lo que necesitas para rendir cada día.<br><em>En una sola toma.</em></h1>
+    <p class="hero-sub">Hidratación, energía, foco, creatina y recuperación — en un solo bote. Únete a la lista y llévate la <strong>Guía de Rendimiento Honesta gratis</strong>, además de un <strong>15% de descuento de fundador</strong> exclusivo para esta lista.</p>
+
+    <div class="form-card">
+      <div class="form-lead">
+        <div class="form-lead-icon">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="form-lead-text">
+          <strong>Al unirte: Guía gratis + 15% de descuento</strong>
+          La Guía de Rendimiento Honesta (qué suplementos funcionan de verdad) y tu 15% de descuento de fundador para el lanzamiento. Sin spam.
+        </div>
+      </div>
+
+      {% form 'customer', id: 'wl-signup-form' %}
+        {% if form.posted_successfully? %}
+          <p class="form-success" style="display:block;">¡Estás dentro! Revisa tu email — te hemos enviado la guía y tu código de fundador.</p>
+        {% else %}
+          <div class="signup-form">
+            <input type="hidden" name="contact[tags]" value="lista-espera-fundador-15">
+            <div class="field-row">
+              <label for="wl-email">Email</label>
+              <input type="email" id="wl-email" name="contact[email]" placeholder="tucorreo@ejemplo.com" required>
+            </div>
+            <button type="submit" class="submit-btn">Únete a la lista de espera →</button>
+          </div>
+          {% if form.errors %}
+            <p class="form-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+      <p class="form-note">Cero spam. Solo el aviso de lanzamiento y tu descuento de fundador. Cancela cuando quieras.</p>
+    </div>
+
+    <div class="proof-strip">
+      <span>Fórmula formulada y validada</span>
+      <span class="dot"></span>
+      <span>Fabricación en curso</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EL PROBLEMA ══ -->
+<div class="wrap">
+  <div class="divider"></div>
+  <div class="section-label">El problema real</div>
+  <h2 class="section-title">Haces todo bien.<br><em>Y aun así no rindes</em> a tu nivel.</h2>
+
+  <div class="moments">
+    <div class="moment">
+      <div class="moment-time">8:00</div>
+      <div class="moment-body">
+        <h4>Empiezas cansado aunque hayas dormido</h4>
+        <p>Sin la hidratación real que tu cuerpo necesita, ninguna cantidad de café arregla la mañana.</p>
+      </div>
+    </div>
+    <div class="moment">
+      <div class="moment-time">15:00</div>
+      <div class="moment-body">
+        <h4>Llega el bajón y ya no es cuestión de ánimo</h4>
+        <p>Es química. Sin el foco sostenido, la tarde se convierte en resistir hasta las 6.</p>
+      </div>
+    </div>
+    <div class="moment">
+      <div class="moment-time">18:00</div>
+      <div class="moment-body">
+        <h4>Entrenas con menos de lo que tienes</h4>
+        <p>Sin la dosis de creatina que de verdad funciona, cada sesión rinde por debajo de tu potencial.</p>
+      </div>
+    </div>
+    <div class="moment">
+      <div class="moment-time">23:00</div>
+      <div class="moment-body">
+        <h4>El cuerpo no se recupera del todo</h4>
+        <p>El estrés acumulado del día no se apaga solo. Y mañana vuelve a empezar igual.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOS COMPLEJOS ══ -->
+<div class="wrap">
+  <div class="divider"></div>
+  <div class="section-label">La solución</div>
+  <h2 class="section-title">Cuatro complejos.<br><em>Una sola toma diaria.</em></h2>
+
+  <div class="complejos-grid">
+    <div class="complejo-card">
+      <div class="complejo-num">01</div>
+      <div class="complejo-name">Hydra Performance</div>
+      <div class="complejo-desc">Sodio, potasio y magnesio bisglicinato. Hidratación que el cuerpo realmente aprovecha.</div>
+    </div>
+    <div class="complejo-card">
+      <div class="complejo-num">02</div>
+      <div class="complejo-name">Focus & Energy</div>
+      <div class="complejo-desc">L-Teanina + cafeína natural en ratio 2:1. Energía limpia, sin el crash de las 4pm.</div>
+    </div>
+    <div class="complejo-card">
+      <div class="complejo-num">03</div>
+      <div class="complejo-name">Performance</div>
+      <div class="complejo-desc">Creatina monohidrato + taurina. La dosis efectiva, no la de escaparate.</div>
+    </div>
+    <div class="complejo-card">
+      <div class="complejo-num">04</div>
+      <div class="complejo-name">Stress & Recovery</div>
+      <div class="complejo-desc">KSM-66® ashwagandha. Porque recuperarse también es cosa de la mente.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOUNDER NOTE ══ -->
+<div class="wrap">
+  <div class="divider"></div>
+  <div class="founder-box">
+    <div class="founder-quote">"Empecé Voltrix porque estaba cansado de tener cuatro botes distintos en la cocina y ninguno de ellos tomándolo de verdad. Quería una sola cosa que hiciera bien lo que cuatro hacían a medias."</div>
+    <div class="founder-sign">— Ayoub Mitxelena, fundador de <span>Voltrix</span></div>
+  </div>
+</div>
+
+<!-- ══ CTA FINAL ══ -->
+<div class="wrap">
+  <div class="divider"></div>
+  <div class="cta-final">
+    <div class="section-label">Última llamada</div>
+    <h2 class="section-title">Sé de los primeros.<br><em>Guía gratis + 15% de dto. de fundador.</em></h2>
+    <a href="#wl-top" class="submit-btn" style="display:inline-block; width:auto; padding:15px 32px; text-decoration:none;" data-wl-scroll-focus>Únete a la lista de espera →</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  <div class="footer-logo">Volt<span class="bolt">rix</span></div>
+  <p class="footer-note">Una sola toma para vida exigente. Lanzamiento próximamente.</p>
+</div>
+
+</div>
+
+<script>
+  (function () {
+    var link = document.querySelector('[data-wl-scroll-focus]');
+    if (!link) return;
+    link.addEventListener('click', function () {
+      setTimeout(function () {
+        var input = document.getElementById('wl-email');
+        if (input) input.focus();
+      }, 400);
+    });
+  })();
+</script>
+
+{% schema %}
+{ "name": "Lista de espera", "settings": [] }
+{% endschema %}
