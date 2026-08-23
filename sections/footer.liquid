@@ -7,7 +7,7 @@
       <li><a href="#formula">La fórmula</a></li>
       <li><a href="#">Cómo tomarlo</a></li>
       <li><a href="#faq">Preguntas</a></li>
-      <li><a href="mailto:hola@getvoltrix.es">Contacto</a></li>
+      <li><a href="{{ pages.contacto.url | default: 'mailto:hola@getvoltrix.es' }}">Contacto</a></li>
       <li><a href="{{ pages.politicas.url | default: '#' }}">Políticas</a></li>
     </ul>
     <div class="vx-footer__legal">
