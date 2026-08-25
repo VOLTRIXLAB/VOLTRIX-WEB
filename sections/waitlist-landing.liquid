@@ -7,8 +7,8 @@
 .wl .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
 
 .wl .nav { display: flex; align-items: center; justify-content: center; padding: 28px 24px 0; }
-.wl .logo { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: 1px; color: #fff; display: flex; align-items: center; gap: 2px; }
-.wl .logo .bolt { color: var(--wl-volt); }
+.wl .wl-logo-img { height: 24px; width: auto; display: block; }
+.wl .wl-logo-img--footer { height: 20px; margin: 0 auto 8px; }
 
 .wl .hero { padding: 64px 0 40px; text-align: center; position: relative; }
 .wl .hero::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 480px; height: 480px; background: radial-gradient(circle, rgba(200,241,53,.13) 0%, transparent 68%); pointer-events: none; z-index: 0; }
@@ -73,9 +73,11 @@
 .wl .cta-final .section-title { margin-bottom: 32px; }
 
 .wl .footer { padding: 48px 0 40px; text-align: center; border-top: 1px solid var(--wl-white-07); margin-top: 56px; }
-.wl .footer-logo { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 8px; }
-.wl .footer-logo .bolt { color: var(--wl-volt); }
 .wl .footer-note { font-size: 11.5px; color: var(--wl-white-30); max-width: 340px; margin: 0 auto; line-height: 1.6; }
+.wl .footer-links { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px; }
+.wl .footer-policy-link { font-size: 12px; color: var(--wl-white-50); text-decoration: underline; text-underline-offset: 3px; }
+.wl .footer-policy-link:hover { color: var(--wl-volt); }
+.wl .footer-links-dot { color: var(--wl-white-30); font-size: 12px; }
 
 @media (max-width: 480px) {
   .wl .hero { padding: 48px 0 32px; }
@@ -87,7 +89,7 @@
 </style>
 
 <div class="nav">
-  <div class="logo">Volt<span class="bolt">rix</span></div>
+  <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" class="wl-logo-img">
 </div>
 
 <!-- ══ HERO + FORM ══ -->
@@ -117,6 +119,10 @@
         {% else %}
           <div class="signup-form">
             <input type="hidden" name="contact[tags]" value="lista-espera-fundador-15">
+            <div class="field-row">
+              <label for="wl-name">Nombre</label>
+              <input type="text" id="wl-name" name="contact[first_name]" placeholder="Tu nombre" required>
+            </div>
             <div class="field-row">
               <label for="wl-email">Email</label>
               <input type="email" id="wl-email" name="contact[email]" placeholder="tucorreo@ejemplo.com" required>
@@ -228,8 +234,13 @@
 
 <!-- ══ FOOTER ══ -->
 <div class="footer">
-  <div class="footer-logo">Volt<span class="bolt">rix</span></div>
+  <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" class="wl-logo-img wl-logo-img--footer">
   <p class="footer-note">Una sola toma para vida exigente. Lanzamiento próximamente.</p>
+  <div class="footer-links">
+    <a href="{{ pages.politicas.url | default: '#' }}" class="footer-policy-link">Políticas legales</a>
+    <span class="footer-links-dot">·</span>
+    <a href="{{ pages.contacto.url | default: 'mailto:hola@getvoltrix.es' }}" class="footer-policy-link">Contacto</a>
+  </div>
 </div>
 
 </div>
