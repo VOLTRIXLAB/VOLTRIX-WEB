@@ -25,10 +25,6 @@
       "type": "hvco",
       "settings": {}
     },
-    "guia": {
-      "type": "guia",
-      "settings": {}
-    },
     "complexes": {
       "type": "ingredient-complexes",
       "settings": {}
@@ -52,6 +48,11 @@
     "faq": {
       "type": "faq",
       "settings": {}
+    },
+    "guia": {
+      "type": "guia",
+      "disabled": true,
+      "settings": {}
     }
   },
   "order": [
@@ -60,11 +61,11 @@
     "dolor",
     "hvco",
     "complexes",
-    "guia",
     "autoridad",
     "why",
     "testimonials",
     "pricing",
-    "faq"
+    "faq",
+    "guia"
   ]
 }
