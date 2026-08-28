@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Voltrix",
+    "theme_version": "1.0.0",
+    "theme_author": "Voltrix"
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Se recomienda una imagen cuadrada, mínimo 32x32px (ideal 512x512px para que se vea nítido en todos los dispositivos)."
+      }
+    ]
+  }
+]
