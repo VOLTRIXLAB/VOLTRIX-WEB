@@ -16,21 +16,18 @@
           </div>
           <div class="vx-cart__item-qty">
             <label class="vx-cart__qty-label">Cantidad</label>
-            <input
-              type="number"
-              value="{{ item.quantity }}"
-              min="0"
-              class="vx-cart__qty-input"
-              data-vx-qty-input
-              data-line-key="{{ item.key }}"
-            >
+            <div class="vx-cart__qty-stepper">
+              <button type="button" class="vx-cart__qty-btn" data-vx-qty-minus data-line-key="{{ item.key }}" aria-label="Reducir cantidad">−</button>
+              <span class="vx-cart__qty-value" data-vx-qty-value data-line-key="{{ item.key }}">{{ item.quantity }}</span>
+              <button type="button" class="vx-cart__qty-btn" data-vx-qty-plus data-line-key="{{ item.key }}" aria-label="Aumentar cantidad">+</button>
+            </div>
           </div>
           <div class="vx-cart__item-line-price" data-vx-line-price>{{ item.final_line_price | money }}</div>
         </div>
       {% endfor %}
     </div>
 
-    <p class="vx-cart__hint">La cantidad se actualiza sola al cambiarla — pon 0 para eliminar un producto.</p>
+    <p class="vx-cart__hint">Usa + / − para cambiar la cantidad — llega a 0 para eliminar un producto.</p>
     <p class="vx-cart__status" data-vx-cart-status></p>
 
     <div class="vx-cart__total">
@@ -86,12 +83,21 @@
   .vx-cart__item.is-updating { opacity: .4; pointer-events: none; }
   .vx-cart__item-title { font-size: 14px; font-weight: 700; color: var(--color-white); margin-bottom: 3px; }
   .vx-cart__item-price-unit { font-size: 12px; color: rgba(255,255,255,.4); }
-  .vx-cart__item-qty { display: flex; flex-direction: column; gap: 4px; }
+
+  .vx-cart__item-qty { display: flex; flex-direction: column; gap: 6px; align-items: center; }
   .vx-cart__qty-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.3); }
-  .vx-cart__qty-input {
-    width: 64px; padding: 8px 10px; border-radius: 8px; border: 1px solid #28284A;
-    background: rgba(255,255,255,.05); color: var(--color-white); font-size: 14px; font-weight: 700; text-align: center;
+  .vx-cart__qty-stepper {
+    display: flex; align-items: center; gap: 0; border: 1px solid #28284A; border-radius: 8px; overflow: hidden;
   }
+  .vx-cart__qty-btn {
+    width: 36px; height: 36px; background: rgba(255,255,255,.05); border: none; color: var(--color-white);
+    font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    touch-action: manipulation;
+  }
+  .vx-cart__qty-btn:hover { background: rgba(200,241,53,.12); color: var(--color-volt); }
+  .vx-cart__qty-btn:active { background: rgba(200,241,53,.25); }
+  .vx-cart__qty-value { min-width: 32px; text-align: center; font-size: 14px; font-weight: 800; color: var(--color-white); }
+
   .vx-cart__item-line-price { font-size: 15px; font-weight: 800; color: var(--color-volt); white-space: nowrap; }
 
   .vx-cart__hint { font-size: 12px; color: rgba(255,255,255,.35); margin-bottom: 6px; }
@@ -113,7 +119,7 @@
   .vx-guarantee__desc { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; }
 
   @media (max-width: 700px) {
-    .vx-cart__item { grid-template-columns: 1fr; gap: 10px; }
+    .vx-cart__item { grid-template-columns: 1fr; gap: 12px; justify-items: start; }
     .vx-cart__item-line-price { justify-self: flex-start; }
     .vx-guarantees { grid-template-columns: repeat(2, 1fr); }
   }
@@ -128,15 +134,19 @@
     var totalEl = document.querySelector('[data-vx-cart-total]');
     var emptyBox = document.querySelector('[data-vx-cart-empty]');
     var fullBox = document.querySelector('[data-vx-cart-full]');
-    var debounceTimers = {};
+    var busy = {};
 
     function formatMoney(cents) {
       return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
     }
 
-    function updateLine(key, quantity, itemEl) {
-      itemEl.classList.add('is-updating');
-      statusEl.textContent = 'Actualizando...';
+    function updateLine(key, quantity) {
+      if (busy[key]) return;
+      busy[key] = true;
+
+      var itemEl = container.querySelector('[data-vx-line-key="' + key + '"]');
+      if (itemEl) itemEl.classList.add('is-updating');
+      if (statusEl) statusEl.textContent = 'Actualizando...';
 
       fetch('/cart/change.js', {
         method: 'POST',
@@ -145,45 +155,52 @@
       })
         .then(function (res) { return res.json(); })
         .then(function (cart) {
-          itemEl.classList.remove('is-updating');
+          busy[key] = false;
 
           if (quantity === 0) {
-            itemEl.remove();
+            if (itemEl) itemEl.remove();
           } else {
             var updatedItem = cart.items.find(function (i) { return i.key === key; });
-            if (updatedItem) {
+            if (updatedItem && itemEl) {
+              itemEl.classList.remove('is-updating');
               itemEl.querySelector('[data-vx-line-price]').textContent = formatMoney(updatedItem.final_line_price);
+              itemEl.querySelector('[data-vx-qty-value]').textContent = updatedItem.quantity;
             }
           }
 
-          totalEl.textContent = formatMoney(cart.total_price);
-          statusEl.textContent = 'Carrito actualizado ✓';
-          setTimeout(function () { statusEl.textContent = ''; }, 2000);
+          if (totalEl) totalEl.textContent = formatMoney(cart.total_price);
+          if (statusEl) {
+            statusEl.textContent = 'Carrito actualizado ✓';
+            setTimeout(function () { statusEl.textContent = ''; }, 1500);
+          }
+
+          document.dispatchEvent(new CustomEvent('vx:cart:updated', { detail: cart }));
 
           if (cart.item_count === 0) {
-            fullBox.style.display = 'none';
-            emptyBox.style.display = 'block';
+            if (fullBox) fullBox.style.display = 'none';
+            if (emptyBox) emptyBox.style.display = 'block';
           }
         })
         .catch(function () {
-          itemEl.classList.remove('is-updating');
-          statusEl.textContent = 'No se pudo actualizar, inténtalo de nuevo.';
+          busy[key] = false;
+          if (itemEl) itemEl.classList.remove('is-updating');
+          if (statusEl) statusEl.textContent = 'No se pudo actualizar, inténtalo de nuevo.';
         });
     }
 
-    container.addEventListener('input', function (e) {
-      var input = e.target.closest('[data-vx-qty-input]');
-      if (!input) return;
+    container.addEventListener('click', function (e) {
+      var minusBtn = e.target.closest('[data-vx-qty-minus]');
+      var plusBtn = e.target.closest('[data-vx-qty-plus]');
+      if (!minusBtn && !plusBtn) return;
 
-      var key = input.getAttribute('data-line-key');
-      var itemEl = input.closest('[data-vx-line-key]');
-      var quantity = parseInt(input.value, 10);
-      if (isNaN(quantity) || quantity < 0) return;
+      var key = (minusBtn || plusBtn).getAttribute('data-line-key');
+      var valueEl = container.querySelector('[data-vx-qty-value][data-line-key="' + key + '"]');
+      if (!valueEl) return;
 
-      clearTimeout(debounceTimers[key]);
-      debounceTimers[key] = setTimeout(function () {
-        updateLine(key, quantity, itemEl);
-      }, 500);
+      var current = parseInt(valueEl.textContent, 10) || 0;
+      var next = minusBtn ? Math.max(0, current - 1) : current + 1;
+
+      updateLine(key, next);
     });
   })();
 </script>
