@@ -70,9 +70,7 @@
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
-  {% if settings.favicon %}
-    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-  {% endif %}
+  <link rel="icon" type="image/png" href="{{ 'favicon-voltrix.png' | asset_url }}">
 </head>
 <body>
   {% sections 'header-group' %}
