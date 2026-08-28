@@ -268,10 +268,22 @@
       })
       .catch(function () {});
 
+    function syncFormSellingPlan(sellingPlanId) {
+      if (!form) return;
+      var hidden = form.querySelector('input[name="selling_plan"]');
+      if (!hidden) {
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'selling_plan';
+        form.appendChild(hidden);
+      }
+      hidden.value = sellingPlanId || '';
+    }
+
     document.addEventListener('change', function (e) {
       var target = e.target;
-      if (!target || !form || !form.contains(target)) return;
-      if (target.name !== 'selling_plan') return;
+      if (!target || target.name !== 'selling_plan') return;
+      syncFormSellingPlan(target.value);
       updateButton(target.value);
     });
   })();
