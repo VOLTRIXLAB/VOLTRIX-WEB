@@ -35,8 +35,8 @@
 .pol .highlight p { margin: 0; color: var(--pv); font-weight: 600; }
 
 .pol .pol-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--pborder); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
-.pol .pol-footer-brand { font-size: 15px; font-weight: 900; color: #fff; }
-.pol .pol-footer-brand span { color: var(--pv); }
+.pol .pol-footer-brand { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--pw50); }
+.pol .pol-footer-logo-img { height: 16px; width: auto; }
 .pol .pol-footer-note { font-size: 11px; color: var(--pw25); text-align: right; }
 
 @media (max-width: 600px) {
@@ -248,7 +248,10 @@
   </div>
 
   <div class="pol-footer">
-    <div class="pol-footer-brand">VOL<span>⚡</span>TRIX · getvoltrix.es</div>
+    <div class="pol-footer-brand">
+      <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" class="pol-footer-logo-img">
+      <span>getvoltrix.es</span>
+    </div>
     <div class="pol-footer-note">Políticas legales · Agosto 2026<br>Navarra, España</div>
   </div>
 

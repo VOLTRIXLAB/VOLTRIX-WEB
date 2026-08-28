@@ -3,16 +3,14 @@
     <a href="{{ routes.root_url }}" class="vx-header__logo">
       <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="eager" class="vx-header__logo-img">
     </a>
-
     <nav class="vx-header__nav">
-      <a href="#formula">La fórmula</a>
-      <a href="#porqué">Por qué Voltrix</a>
-      <a href="#producto">El producto</a>
-      <a href="#faq">Preguntas</a>
+      <a href="{{ routes.root_url }}#formula">La fórmula</a>
+      <a href="{{ routes.root_url }}#porqué">Por qué Voltrix</a>
+      <a href="{{ routes.root_url }}#producto">El producto</a>
+      <a href="{{ routes.root_url }}#faq">Preguntas</a>
     </nav>
-
     <div class="vx-header__actions">
-      <a href="#producto" class="vx-header__cta">Comprar — 44,99€</a>
+      <a href="{{ routes.root_url }}#producto" class="vx-header__cta">Comprar — 44,99€</a>
       <button type="button" class="vx-header__burger" aria-label="Abrir menú" aria-expanded="false" data-vx-menu-toggle>
         <span></span><span></span><span></span>
       </button>
@@ -20,11 +18,11 @@
   </div>
 
   <div class="vx-header__mobile" data-vx-mobile-menu>
-    <a href="#formula" data-vx-menu-link>La fórmula</a>
-    <a href="#porqué" data-vx-menu-link>Por qué Voltrix</a>
-    <a href="#producto" data-vx-menu-link>El producto</a>
-    <a href="#faq" data-vx-menu-link>Preguntas</a>
-    <a href="#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 44,99€</a>
+    <a href="{{ routes.root_url }}#formula" data-vx-menu-link>La fórmula</a>
+    <a href="{{ routes.root_url }}#porqué" data-vx-menu-link>Por qué Voltrix</a>
+    <a href="{{ routes.root_url }}#producto" data-vx-menu-link>El producto</a>
+    <a href="{{ routes.root_url }}#faq" data-vx-menu-link>Preguntas</a>
+    <a href="{{ routes.root_url }}#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 44,99€</a>
   </div>
 </header>
 
