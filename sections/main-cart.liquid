@@ -11,8 +11,16 @@
       {% for item in cart.items %}
         <div class="vx-cart__item" data-vx-line-key="{{ item.key }}">
           <div class="vx-cart__item-info">
-            <div class="vx-cart__item-title">{{ item.title }}</div>
+            <div class="vx-cart__item-title">
+              {{ item.title }}
+              {% if item.selling_plan_allocation %}
+                <span class="vx-cart__sub-badge">Suscripción mensual</span>
+              {% endif %}
+            </div>
             <div class="vx-cart__item-price-unit">{{ item.price | money }} / unidad</div>
+            {% if item.selling_plan_allocation %}
+              <div class="vx-cart__sub-desc">Se renueva cada mes · Cancela cuando quieras</div>
+            {% endif %}
           </div>
           <div class="vx-cart__item-qty">
             <label class="vx-cart__qty-label">Cantidad</label>
@@ -81,8 +89,14 @@
     transition: opacity .2s ease;
   }
   .vx-cart__item.is-updating { opacity: .4; pointer-events: none; }
-  .vx-cart__item-title { font-size: 14px; font-weight: 700; color: var(--color-white); margin-bottom: 3px; }
+  .vx-cart__item-title { font-size: 14px; font-weight: 700; color: var(--color-white); margin-bottom: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .vx-cart__sub-badge {
+    display: inline-flex; align-items: center; font-size: 10px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
+    background: rgba(200,241,53,.12); color: var(--color-volt); border: 1px solid rgba(200,241,53,.3);
+    border-radius: 999px; padding: 3px 9px;
+  }
   .vx-cart__item-price-unit { font-size: 12px; color: rgba(255,255,255,.4); }
+  .vx-cart__sub-desc { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 3px; }
 
   .vx-cart__item-qty { display: flex; flex-direction: column; gap: 6px; align-items: center; }
   .vx-cart__qty-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.3); }
