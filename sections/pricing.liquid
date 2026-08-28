@@ -108,6 +108,14 @@
         <button class="vx-btn-add" disabled>Próximamente</button>
       {% endif %}
 
+      <details class="vx-sub-detail">
+        <summary>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Detalles de la suscripción
+        </summary>
+        <p><strong>Control total sobre tu suscripción.</strong> Pausa, reprograma, edita o cancela tus envíos cuando quieras, sin compromiso ni permanencia.</p>
+      </details>
+
       <div class="vx-garantia">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Envío incluido · Suscripción cancelable cuando quieras
@@ -172,6 +180,16 @@
   .vx-btn-add__compare { text-decoration: line-through; opacity: .55; font-weight: 700; margin-right: 4px; }
   .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); }
   .vx-garantia svg { color: var(--color-volt); }
+
+  .vx-sub-detail { border: 1px solid #28284A; border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; }
+  .vx-sub-detail summary {
+    display: flex; align-items: center; gap: 9px; cursor: pointer;
+    font-size: 13px; font-weight: 700; color: rgba(255,255,255,.75); list-style: none;
+  }
+  .vx-sub-detail summary::-webkit-details-marker { display: none; }
+  .vx-sub-detail summary svg { color: var(--color-volt); flex-shrink: 0; }
+  .vx-sub-detail p { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-top: 10px; padding-left: 25px; }
+  .vx-sub-detail p strong { color: var(--color-white); }
   @media (max-width: 700px) { .vx-prod__layout { grid-template-columns: 1fr; } }
 </style>
 <script>
