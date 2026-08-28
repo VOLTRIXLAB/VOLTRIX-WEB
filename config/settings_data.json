@@ -16,11 +16,6 @@
         "disabled": false,
         "settings": {}
       },
-      "4379643256173503040": {
-        "type": "shopify://apps/joy-subscription-app/blocks/app-embed/6aa30d9c-ff0b-4f29-a82d-a633d8e04b9a",
-        "disabled": false,
-        "settings": {}
-      },
       "6159598353363395418": {
         "type": "shopify://apps/google-youtube/blocks/store_widget/14ec7bd0-ac77-49a9-9417-90752398bdff",
         "disabled": false,
@@ -31,6 +26,11 @@
           "mobile_side_margin": 16,
           "mobile_bottom_margin": 46
         }
+      },
+      "341186785192672687": {
+        "type": "shopify://apps/seal-subscriptions/blocks/subscription-script-append/13b25004-a140-4ab7-b5fe-29918f759699",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
