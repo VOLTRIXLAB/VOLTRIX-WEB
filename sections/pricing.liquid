@@ -94,9 +94,11 @@
         <span class='appstle_stand_alone_selector' data-product-handle='{{ vx_product.handle }}' style="display:none;"></span>
         {% form 'product', vx_product %}
           <input type="hidden" name="id" value="{{ vx_product.selected_or_first_available_variant.id }}">
-          <button type="submit" class="vx-btn-add" {% unless vx_product.available %}disabled{% endunless %}>
+          <button type="submit" class="vx-btn-add" data-vx-buy-btn {% unless vx_product.available %}disabled{% endunless %}>
             {% if vx_product.available %}
-              Empezar con Voltrix — {{ vx_product.price | money }} →
+              <span data-vx-btn-label>Empezar con Voltrix</span> —
+              <span data-vx-btn-compare class="vx-btn-add__compare" style="display:none;"></span>
+              <span data-vx-btn-price>{{ vx_product.price | money }}</span> →
             {% else %}
               Próximamente
             {% endif %}
@@ -167,6 +169,7 @@
   .vx-bcheck { width: 19px; height: 19px; border-radius: 5px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--color-volt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
   .vx-btn-add { display: block; text-align: center; width: 100%; max-width: 420px; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; }
   .vx-btn-add:disabled { opacity: .5; cursor: not-allowed; }
+  .vx-btn-add__compare { text-decoration: line-through; opacity: .55; font-weight: 700; margin-right: 4px; }
   .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); }
   .vx-garantia svg { color: var(--color-volt); }
   @media (max-width: 700px) { .vx-prod__layout { grid-template-columns: 1fr; } }
@@ -198,6 +201,83 @@
     });
   })();
 </script>
+{% if vx_product %}
+<script>
+  (function () {
+    var btn = document.querySelector('[data-vx-buy-btn]');
+    if (!btn) return;
+
+    var labelEl = btn.querySelector('[data-vx-btn-label]');
+    var priceEl = btn.querySelector('[data-vx-btn-price]');
+    var compareEl = btn.querySelector('[data-vx-btn-compare]');
+    var form = btn.closest('form');
+    var productHandle = {{ vx_product.handle | json }};
+    var productData = null;
+
+    function formatMoney(cents) {
+      return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
+    }
+
+    function updateButton(sellingPlanId) {
+      if (!productData) return;
+
+      if (!sellingPlanId) {
+        // Compra única
+        var variant = productData.variants[0];
+        labelEl.textContent = 'Empezar con Voltrix';
+        priceEl.textContent = formatMoney(variant.price);
+        if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+          compareEl.textContent = formatMoney(variant.compare_at_price);
+          compareEl.style.display = '';
+        } else {
+          compareEl.style.display = 'none';
+        }
+        return;
+      }
+
+      // Suscripción: busca el plan seleccionado en los grupos de venta
+      var plan = null;
+      (productData.selling_plan_groups || []).forEach(function (group) {
+        group.selling_plans.forEach(function (p) {
+          if (String(p.id) === String(sellingPlanId)) plan = p;
+        });
+      });
+
+      if (plan) {
+        var variant = productData.variants[0];
+        var allocation = (variant.selling_plan_allocations || []).find(function (a) {
+          return String(a.selling_plan_id) === String(sellingPlanId);
+        });
+        labelEl.textContent = 'Suscribirme a Voltrix';
+        if (allocation) {
+          priceEl.textContent = formatMoney(allocation.price);
+          if (allocation.compare_at_price && allocation.compare_at_price > allocation.price) {
+            compareEl.textContent = formatMoney(allocation.compare_at_price);
+            compareEl.style.display = '';
+          } else {
+            compareEl.style.display = 'none';
+          }
+        }
+      }
+    }
+
+    fetch('/products/' + productHandle + '.js')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        productData = data;
+      })
+      .catch(function () {});
+
+    document.addEventListener('change', function (e) {
+      var target = e.target;
+      if (!target || !form || !form.contains(target)) return;
+      if (target.name !== 'selling_plan') return;
+      updateButton(target.value);
+    });
+  })();
+</script>
+{% endif %}
+
 {% schema %}
 {
   "name": "Producto y Precio",
