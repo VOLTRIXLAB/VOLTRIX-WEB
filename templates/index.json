@@ -16,6 +16,10 @@
       "type": "hvco",
       "settings": {}
     },
+    "metodo": {
+      "type": "metodo-voltrix",
+      "settings": {}
+    },
     "complexes": {
       "type": "ingredient-complexes",
       "settings": {}
@@ -50,6 +54,7 @@
     "proof",
     "dolor",
     "hvco",
+    "metodo",
     "complexes",
     "guia",
     "autoridad",
